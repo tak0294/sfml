@@ -50,7 +50,7 @@ void TestScene::draw(sf::RenderWindow &window) {
     Video::drawRect(10, 10, 50, 100);
     
     this->mover2->draw();
-    Video::drawText("DDDD!!", Video::FONT_NORMAL, 200, 400, 100);
+    Video::drawText(L"こんにちは!!", Video::FONT_NORMAL, 10, 100, 24 * mover2->pos.x * 0.01);
 }
 
 void TestScene::update() {

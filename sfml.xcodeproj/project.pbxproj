@@ -27,6 +27,10 @@
 		3B6749B61BC77EB8009A0E04 /* pumpkin064.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6749B41BC77EB8009A0E04 /* pumpkin064.png */; };
 		3B6749B71BC77EB8009A0E04 /* yutapon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B6749B51BC77EB8009A0E04 /* yutapon.ttf */; };
 		3B6749B91BC77F89009A0E04 /* city.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6749B81BC77F89009A0E04 /* city.png */; };
+		3BE08E0B1D1256500091D120 /* RaceScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BE08E0A1D1256500091D120 /* RaceScene.cpp */; };
+		3BE08E0D1D12F6250091D120 /* road.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3BE08E0C1D12F6250091D120 /* road.jpg */; };
+		3BE08E151D191C450091D120 /* img in Resources */ = {isa = PBXBuildFile; fileRef = 3BE08E141D191C450091D120 /* img */; };
+		3BE08E181D1A5B740091D120 /* PlayerCar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3BE08E171D1A5B740091D120 /* PlayerCar.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +71,12 @@
 		3B6749B41BC77EB8009A0E04 /* pumpkin064.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pumpkin064.png; sourceTree = "<group>"; };
 		3B6749B51BC77EB8009A0E04 /* yutapon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = yutapon.ttf; sourceTree = "<group>"; };
 		3B6749B81BC77F89009A0E04 /* city.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = city.png; sourceTree = "<group>"; };
+		3BE08E091D1256000091D120 /* RaceScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RaceScene.h; sourceTree = "<group>"; };
+		3BE08E0A1D1256500091D120 /* RaceScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RaceScene.cpp; sourceTree = "<group>"; };
+		3BE08E0C1D12F6250091D120 /* road.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = road.jpg; sourceTree = "<group>"; };
+		3BE08E141D191C450091D120 /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; path = img; sourceTree = "<group>"; };
+		3BE08E161D1A5B310091D120 /* PlayerCar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerCar.h; sourceTree = "<group>"; };
+		3BE08E171D1A5B740091D120 /* PlayerCar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerCar.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				3B1F5C621D11988800DBFA2B /* TestScene.cpp */,
+				3BE08E0A1D1256500091D120 /* RaceScene.cpp */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -92,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				3B1F5C641D11988F00DBFA2B /* TestScene.hpp */,
+				3BE08E091D1256000091D120 /* RaceScene.h */,
 			);
 			path = scene;
 			sourceTree = "<group>";
@@ -100,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				3B1F5C671D1198E400DBFA2B /* TestPumpkin.cpp */,
+				3BE08E171D1A5B740091D120 /* PlayerCar.cpp */,
 			);
 			path = mover;
 			sourceTree = "<group>";
@@ -108,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				3B1F5C6A1D1199D000DBFA2B /* TestPumpkin.hpp */,
+				3BE08E161D1A5B310091D120 /* PlayerCar.h */,
 			);
 			path = mover;
 			sourceTree = "<group>";
@@ -152,6 +166,8 @@
 		3B28EB011BC6C80F00F3D46A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3BE08E141D191C450091D120 /* img */,
+				3BE08E0C1D12F6250091D120 /* road.jpg */,
 				3B1F5C5B1D0FC41C00DBFA2B /* fire.jpg */,
 				3B6749B81BC77F89009A0E04 /* city.png */,
 				3B6749B41BC77EB8009A0E04 /* pumpkin064.png */,
@@ -292,10 +308,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BE08E151D191C450091D120 /* img in Resources */,
 				3B28EB091BC6C80F00F3D46A /* icon.png in Resources */,
 				3B6749B61BC77EB8009A0E04 /* pumpkin064.png in Resources */,
 				3B28EB071BC6C80F00F3D46A /* sansation.ttf in Resources */,
 				3B6749B71BC77EB8009A0E04 /* yutapon.ttf in Resources */,
+				3BE08E0D1D12F6250091D120 /* road.jpg in Resources */,
 				3B28EB051BC6C80F00F3D46A /* nice_music.ogg in Resources */,
 				3B1F5C5C1D0FC41C00DBFA2B /* fire.jpg in Resources */,
 				3B28EB031BC6C80F00F3D46A /* cute_image.jpg in Resources */,
@@ -329,11 +347,13 @@
 				3B1F5C691D1198E400DBFA2B /* TestPumpkin.cpp in Sources */,
 				3B28EAFD1BC6C80E00F3D46A /* ResourcePath.mm in Sources */,
 				3B6749AE1BC77E27009A0E04 /* Particle.cpp in Sources */,
+				3BE08E0B1D1256500091D120 /* RaceScene.cpp in Sources */,
 				3B6749B21BC77E27009A0E04 /* Video.cpp in Sources */,
 				3B6749AF1BC77E27009A0E04 /* ParticleSystem.cpp in Sources */,
 				3B6749AC1BC77E27009A0E04 /* InputSystem.cpp in Sources */,
 				3B6749B01BC77E27009A0E04 /* Shader.cpp in Sources */,
 				3B6749B11BC77E27009A0E04 /* ShaderScript.cpp in Sources */,
+				3BE08E181D1A5B740091D120 /* PlayerCar.cpp in Sources */,
 				3B6749AB1BC77E27009A0E04 /* GameManager.cpp in Sources */,
 				3B6749B31BC77E27009A0E04 /* main.cpp in Sources */,
 				3B1F5C631D11988800DBFA2B /* TestScene.cpp in Sources */,

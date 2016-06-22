@@ -1,5 +1,7 @@
 #include "library/Mover.h"
 #include "library/Video.h"
+// Here is a small helper for you ! Have a look.
+#include "ResourcePath.hpp"
 
 Mover::Mover() {
 	this->pos = sf::Vector2f();
@@ -10,9 +12,10 @@ Mover::Mover() {
 }
 
 void Mover::setTexture(std::string texture_filename) {
-	this->m_texture.loadFromFile(texture_filename);
-	this->m_textureSize = this->m_texture.getSize();
-	this->m_sprite.setTexture(this->m_texture);
+//	this->m_texture.loadFromFile(resourcePath() + texture_filename);
+    this->m_texture = Video::loadTexture(texture_filename);
+	this->m_textureSize = this->m_texture->getSize();
+	this->m_sprite.setTexture(*this->m_texture);
 }
 
 void Mover::draw() {

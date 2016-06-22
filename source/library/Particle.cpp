@@ -1,3 +1,4 @@
+#include <math.h>
 #include "library/Particle.h"
 
 ///////////////////////////////////////////////////
@@ -27,8 +28,12 @@ void Particle::initialize(int x, int y) {
 	//m_shape.setPosition(400, 400);
 	pos.x = x;
 	pos.y = y;
-	vel.y = (rand()%100-50) * 0.1f;
-	vel.x = (rand()%100-50) * 0.1f;
+    double randAngle = rand()%360;
+    vel.x = cos(randAngle * 3.14/180) * (rand()%5);
+    vel.y = sin(randAngle * 3.14/180) * (rand()%5);
+    
+//	vel.y = (rand()%100-50) * 0.1f;
+//	vel.x = (rand()%100-50) * 0.1f;
 	isActive = true;
 	m_lifeTime = 30 + (rand() % 50);
 }

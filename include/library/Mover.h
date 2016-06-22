@@ -6,7 +6,7 @@
 
 class Mover {
 
-	sf::Texture m_texture;
+	sf::Texture *m_texture;
 	sf::Vector2u m_textureSize;
 	sf::Sprite m_sprite;
 

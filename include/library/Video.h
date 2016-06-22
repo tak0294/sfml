@@ -1,7 +1,8 @@
 #ifndef VIDEO_SYSTEM_H
 #define VIDEO_SYSTEM_H
-#include <SFML/Graphics.hpp>
+#include <unordered_map>
 #include <string>
+#include <SFML/Graphics.hpp>
 #include "library/Shader/Shader.h"
 #include "library/Shader/ShaderScript.h"
 
@@ -82,6 +83,11 @@ private:
     // Shape ref.
     //////////////////
     static sf::RectangleShape m_rectShape;
+    
+    //////////////////
+    // Bitmap Store.
+    //////////////////
+    static std::unordered_map<std::string, sf::Texture*> m_textureStore;
 
 /**
  * public member.
@@ -96,8 +102,21 @@ public:
 	static void bgFromFile(BgLayer layer, std::string image_filename);
 	static void bgFromFile(BgLayer layer, std::string image_filename, int x, int y);
 
-	static void drawText(std::string str, Video::FontType fontType, int x, int y);
-	static void drawText(std::string str, Video::FontType fontType, int x, int y, int size);
+	static void drawText(wchar_t *str, Video::FontType fontType, int x, int y);
+	static void drawText(wchar_t *str, Video::FontType fontType, int x, int y, int size);
+    
+    ///////////////////////////////////////////////////////////////////
+    // Load Texture.
+    ///////////////////////////////////////////////////////////////////
+    static sf::Texture* loadTexture(std::string filePath);
+    
+    ///////////////////////////////////////////////////////////////////
+    // Mathmatic methods.
+    ///////////////////////////////////////////////////////////////////
+    static double calcBezierX(double t, double startX, double endX, double processX);
+    static double calcBezierY(double t, double startY, double endY, double processY);
+    static sf::Vector2<double> calcPerspectivePoint(double focus, double x, double y, double z);
+    static double calcScaleFromZ(double focus, double z);
     
     ///////////////////////////////////////////////////////////////////
     //	Draw shapes

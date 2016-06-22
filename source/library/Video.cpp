@@ -22,7 +22,7 @@ sf::Clock Video::videoClock;
 
 sf::RenderWindow Video::window;
 int Video::m_bgScrollSpeeds[BG_LAYER_NUM];
-
+std::unordered_map<std::string, sf::Texture*> Video::m_textureStore;
 
 ///////////////////////////////////////////////////////////////////
 //	Layer Sprites
@@ -92,6 +92,64 @@ void Video::toggleFullScreen() {
 	//SDL_WM_ToggleFullScreen(SDL_GetVideoSurface());
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////
+// テクスチャ読み込み＆キャッシュ.
+/////////////////////////////////////////////////////////////////////////////////
+sf::Texture* Video::loadTexture(std::string filePath) {
+    if(Video::m_textureStore[filePath] == NULL) {
+        sf::Texture *tex = new sf::Texture;
+        tex->loadFromFile(resourcePath() + filePath);
+        Video::m_textureStore[filePath] = tex;
+    }
+    
+    return Video::m_textureStore[filePath];
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+// ベジェ曲線の計算.
+/////////////////////////////////////////////////////////////////////////////////
+/**
+ * X座標を求める.
+ * @param double t -> 0.0~1.0の間
+ * @param double startX -> 始点
+ * @param double endX   -> 終点
+ * @param double processX -> 作用点
+ */
+double Video::calcBezierX(double t, double startX, double endX, double processX) {
+    return (1-t)*(1-t)*startX + 2*(1-t)*t*processX + t*t*endX;
+}
+
+/**
+ * Y座標を求める.
+ * @param double t -> 0.0~1.0の間
+ * @param double startY -> 始点
+ * @param double endY   -> 終点
+ * @param double processY -> 作用点
+ */
+double Video::calcBezierY(double t, double startY, double endY, double processY) {
+    return (1-t)*(1-t)*startY + 2*(1-t)*t*processY + t*t*endY;
+}
+
+
+/**
+ * 透視投影座標へ変換する.
+ */
+sf::Vector2<double> Video::calcPerspectivePoint(double focus, double x, double y, double z) {
+    sf::Vector2<double> res;
+    res.x = (focus / (z + focus)) * x;
+    res.y = (focus / (z + focus)) * y;
+    return res;
+}
+
+/**
+ * Z座標からスケールを計算する.
+ */
+double Video::calcScaleFromZ(double focus, double z) {
+    return focus/(focus + z);
+}
+
+
 /**
  * 背景スクロール方向設定.
  */
@@ -119,13 +177,12 @@ void Video::bgFromFile(BgLayer layer, std::string image_filename) {
  * 背景
  */
 void Video::bgFromFile(BgLayer layer, std::string image_filename, int x, int y) {
-	sf::Texture backgroundTexture;
-	backgroundTexture.loadFromFile(image_filename);
-	m_bgSizes[layer] = backgroundTexture.getSize();
+    sf::Texture *backgroundTexture = Video::loadTexture(image_filename);
+	m_bgSizes[layer] = backgroundTexture->getSize();
 	m_bgLayers[layer].create(m_bgSizes[layer].x, m_bgSizes[layer].y);
 
 	sf::Sprite backgroundSprite;
-	backgroundSprite.setTexture(backgroundTexture);
+	backgroundSprite.setTexture(*backgroundTexture);
 	m_bgLayers[layer].draw(backgroundSprite);
 	m_bgPositions[layer].x = x;
 	m_bgPositions[layer].y = y;
@@ -145,16 +202,15 @@ void Video::tiledBgFromFile(BgLayer layer, std::string image_filename) {
  * 背景.
  */
 void Video::tiledBgFromFile(BgLayer layer, std::string image_filename, BgTiledType tiledType, int offset) {
-	sf::Texture backgroundTexture;
+    sf::Texture *backgroundTexture = Video::loadTexture(image_filename);
 	sf::Sprite backgroundSprite;
-	backgroundTexture.loadFromFile(image_filename);
-	m_bgSizes[layer] = backgroundTexture.getSize();
+	m_bgSizes[layer] = backgroundTexture->getSize();
 	
 	int w = m_width + m_bgSizes[layer].x*2;
 	int h = m_height + m_bgSizes[layer].y*2;
 	
 	m_bgLayers[layer].create(w, h);
-	backgroundSprite.setTexture(backgroundTexture);
+	backgroundSprite.setTexture(*backgroundTexture);
 
 	////////////////////////////////////////////
 	// BgTiledTypeによって敷き詰め方を変える.
@@ -277,11 +333,11 @@ void Video::flipSpriteToWindow(sf::RenderWindow &window) {
 /**
  * テキスト描画.
  */
-void Video::drawText(std::string str, Video::FontType fontType, int x, int y) {
+void Video::drawText(wchar_t *str, Video::FontType fontType, int x, int y) {
 	Video::drawText(str, fontType, x, y, DEFAULT_FONT_SIZE);
 }
 
-void Video::drawText(std::string str, Video::FontType fontType, int x, int y, int size) {
+void Video::drawText(wchar_t *str, Video::FontType fontType, int x, int y, int size) {
 	sf::Text text(str, m_fonts[fontType], size);
 	text.setPosition(x, y);
 	// window.draw(text);
